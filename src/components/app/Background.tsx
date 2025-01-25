@@ -1,12 +1,15 @@
 import React, { useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Points, PointMaterial } from '@react-three/drei';
+import { Canvas, useFrame, extend } from '@react-three/fiber';
+import { Points, PointMaterial, Mesh } from '@react-three/drei';
+import * as THREE from 'three';
 import * as random from 'maath/random';
 import { Vector3 } from 'three';
 
+extend(THREE);
+
 export function Stars(props: any) {
-  const ref = useRef<any>();
-  const sphere = random.inSphere(new Float32Array(5000), { radius: 1.5 });
+  const ref = useRef<any>(null);
+  const [sphere] = React.useState(() => random.inSphere(new Float32Array(5000), { radius: 1.5 }));
   const mousePosition = useRef({ x: 0, y: 0 });
 
   useFrame((state, delta) => {
@@ -34,7 +37,7 @@ export function Stars(props: any) {
   }, []);
 
   return (
-    <group rotation={[0, 0, Math.PI / 4]}>
+    <Mesh rotation={[0, 0, Math.PI / 4]}>
       <Points ref={ref} positions={sphere} stride={3} frustumCulled={false} {...props}>
         <PointMaterial
           transparent
@@ -44,6 +47,6 @@ export function Stars(props: any) {
           depthWrite={false}
         />
       </Points>
-    </group>
+    </Mesh>
   );
 }

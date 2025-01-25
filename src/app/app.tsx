@@ -4,6 +4,7 @@ import { Header } from '@/components/app/Header';
 import { Stars } from '@/components/app/Background';
 import FeatureCard from '@/components/app/FeatureCard';
 import FeatureListCard from '@/components/app/FeatureListCard';
+import { Canvas } from '@react-three/fiber';
 
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
@@ -66,9 +67,9 @@ const App = () => {
       <Toaster />
       <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white relative">
         <div className="absolute inset-0 z-0">
-          {/* <Canvas camera={{ position: [0, 0, 1] }}> */}
+          <Canvas camera={{ position: [0, 0, 1] }}>
             <Stars />
-          {/* </Canvas> */}
+          </Canvas>
         </div>
         <div className="relative z-10">
           <Header />
